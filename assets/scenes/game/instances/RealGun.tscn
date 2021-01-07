@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/textures/gun.png" type="Texture" id=3]
+
+[node name="RealGun" type="Sprite"]
+position = Vector2( 35, 0 )
+texture = ExtResource( 3 )
+
+[node name="Firepoint" type="Node2D" parent="."]
+position = Vector2( 60, 0 )

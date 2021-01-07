@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/scripts/game/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://assets/textures/gun.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/enemy_run.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/enemy.png" type="Texture" id=4]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "run",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 24, 32 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.403922, 0.937255, 0.231373, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.921569, 0.14902, 0.14902, 1 )
+
+[node name="Enemy" type="KinematicBody2D" groups=[
+"Enemy",
+]]
+position = Vector2( 4950, -150 )
+collision_mask = 2147483649
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 3 )
+
+[node name="Gun" type="Sprite" parent="AnimatedSprite"]
+position = Vector2( 35, 0 )
+texture = ExtResource( 2 )
+
+[node name="Firepoint" type="Node2D" parent="AnimatedSprite/Gun"]
+position = Vector2( 60, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 4 )
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+margin_left = -30.0
+margin_top = -42.0
+margin_right = 30.0
+margin_bottom = -26.0
+rect_scale = Vector2( 1, 0.5 )
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 6 )
+max_value = 300.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
